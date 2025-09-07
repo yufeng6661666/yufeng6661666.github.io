@@ -27,14 +27,14 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             width: 100%;
             max-width: 450px;
-            max-height: 90vh;
             overflow: hidden;
             position: relative;
+            max-height: 95vh;
             display: flex;
             flex-direction: column;
         }
         
-        .forms-wrapper {
+        .form-containers-wrapper {
             position: relative;
             flex: 1;
             overflow: hidden;
@@ -44,7 +44,6 @@
             padding: 40px 30px;
             transition: transform 0.6s ease-in-out;
             width: 100%;
-            box-sizing: border-box;
         }
         
         .login-container {
@@ -57,7 +56,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            min-height: 100%;
+            height: 100%;
             overflow-y: auto;
         }
         
@@ -114,6 +113,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            margin-top: 10px;
         }
         
         button:hover {
@@ -150,6 +150,8 @@
             font-size: 14px;
             margin-top: 5px;
             display: none;
+            text-align: center;
+            margin-bottom: 15px;
         }
         
         .password-rules {
@@ -158,14 +160,13 @@
             margin-top: 5px;
         }
         
-        /* 响应式设计 */
         @media (max-height: 700px) {
             .container {
-                max-height: 95vh;
+                max-height: 85vh;
             }
             
             .form-container {
-                padding: 30px 25px;
+                padding: 25px 20px;
             }
             
             h1 {
@@ -181,7 +182,6 @@
         @media (max-width: 480px) {
             .container {
                 border-radius: 10px;
-                max-height: 95vh;
             }
             
             .form-container {
@@ -191,31 +191,17 @@
             body {
                 padding: 15px;
             }
-        }
-        
-        /* 滚动条样式 */
-        .register-container::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        .register-container::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-        
-        .register-container::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 10px;
-        }
-        
-        .register-container::-webkit-scrollbar-thumb:hover {
-            background: #a8a8a8;
+            
+            h1 {
+                font-size: 22px;
+                margin-bottom: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container" id="container">
-        <div class="forms-wrapper">
+        <div class="form-containers-wrapper">
             <div class="form-container login-container">
                 <h1>欢迎回来</h1>
                 <form id="loginForm">
@@ -261,25 +247,6 @@
                         <input type="password" id="registerConfirmPassword" placeholder="请再次输入密码" required>
                         <div class="error-message" id="registerConfirmPasswordError"></div>
                     </div>
-                    <div class="form-group">
-                        <label for="registerFirstName">名字</label>
-                        <input type="text" id="registerFirstName" placeholder="请输入名字">
-                    </div>
-                    <div class="form-group">
-                        <label for="registerLastName">姓氏</label>
-                        <input type="text" id="registerLastName" placeholder="请输入姓氏">
-                    </div>
-                    <div class="form-group">
-                        <label for="registerPhone">手机号码</label>
-                        <input type="tel" id="registerPhone" placeholder="请输入手机号码">
-                    </div>
-                    <div class="form-group">
-                        <label>
-                            <input type="checkbox" id="termsAgree" required>
-                            我同意<a href="#">服务条款</a>和<a href="#">隐私政策</a>
-                        </label>
-                        <div class="error-message" id="termsAgreeError"></div>
-                    </div>
                     <button type="submit">注册</button>
                 </form>
                 <div class="switch-form">
@@ -303,8 +270,6 @@
             showRegister.addEventListener('click', () => {
                 container.classList.add('active');
                 clearFormErrors('register');
-                // 滚动到注册表单顶部
-                document.querySelector('.register-container').scrollTop = 0;
             });
             
             // 切换到登录表单
@@ -387,7 +352,6 @@
                 const email = document.getElementById('registerEmail').value.trim();
                 const password = document.getElementById('registerPassword').value;
                 const confirmPassword = document.getElementById('registerConfirmPassword').value;
-                const termsAgreed = document.getElementById('termsAgree').checked;
                 
                 // 清除之前的错误信息
                 clearFormErrors('register');
@@ -434,12 +398,6 @@
                     isValid = false;
                 }
                 
-                // 验证条款同意
-                if (!termsAgreed) {
-                    showError('termsAgreeError', '您必须同意服务条款和隐私政策');
-                    isValid = false;
-                }
-                
                 return isValid;
             }
             
@@ -448,18 +406,11 @@
                 const username = document.getElementById('registerUsername').value.trim();
                 const email = document.getElementById('registerEmail').value.trim();
                 const password = document.getElementById('registerPassword').value;
-                const firstName = document.getElementById('registerFirstName').value.trim();
-                const lastName = document.getElementById('registerLastName').value.trim();
-                const phone = document.getElementById('registerPhone').value.trim();
                 
                 const userData = {
                     username: username,
                     email: email,
-                    password: password,
-                    firstName: firstName,
-                    lastName: lastName,
-                    phone: phone,
-                    registerDate: new Date().toISOString()
+                    password: password
                 };
                 
                 // 从localStorage获取现有用户数据或创建新数组
