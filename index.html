@@ -61,29 +61,67 @@
         .download_button {
             background-size:100px;
             height:25px;
-            width:55px;
+            width:140px;
             background-color: green;
             color: white;
             border-radius: 10px;
             border: 2px solid #8AC007;
             cursor:pointer;
+            white-space:nowrap;
+        }
+        .fast_download_button {
+            background-size:100px;
+            height:25px;
+            width:140px;
+            background-color:red;
+            color:white;
+            border-radius:10px;
+            border:2px solid #8AC007;
+            cursor:pointer;
+            white-space:nowrap;
         }
     </style>
     <script>
         function download_file(href,title) {
-            const a = document.createElement('a');
-            a.setAttribute('href', href);
-            a.setAttribute('download', title);
-            a.click();
+            const link = document.createElement('a');
+            link.href = href;
+            link.download = title;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     </script>
 </head>
 <body>
     <div>
-        <div class="floating-box" ,style="height:300px;width:500px;">
+        <div style="color:white;">
+            <strong style="font-size:50px;">欢迎来到我分享的网站                                  </strong>
+            <pre style="font-size:20px;">这里我会分享一些有用的东西或者我童年想要玩的东西                               </pre>
+        </div>
+    </div>
+    <div>
+        <div class="floating-box">
             <strong style="font-size:25px;">一键部署DeepSeek</strong>
             <p>一款非常简洁的终端一键部署DeepSeek的小工具，体积小巧，轻量</p>
             <button class="download_button" onclick="download_file('./download/一键部署DeepSeek.exe','一键部署DeepSeek.exe')">下载</button>
+        </div> <br /> <br />
+        <div class="floating-box">
+            <strong style="font-size:25px">空想特摄</strong>
+            <p>童年的游戏,为它找了全网才找到,下载后是个压缩包,解压即可</p>
+            <button class="download_button" onclick="download_file('https://github.com/yufeng6661666/yufeng6661666.github.io/releases/download/%E4%B8%8D%E7%9F%A5%E9%81%93/ps2.ULTRAMAN_JAP_PS2DVD.zip','空想特摄.zip')">下载</button>
+            <button class="fast_download_button" onclick="download_file('https://ghproxy.cn/github.com/yufeng6661666/yufeng6661666.github.io/releases/download/%E4%B8%8D%E7%9F%A5%E9%81%93/ps2.ULTRAMAN_JAP_PS2DVD.zip','空想特摄.zip')">快速下载</button>
+        </div> <br /> <br />
+        <div class="floating-box">
+            <strong style="font-size:25px">格斗进化3</strong>
+            <p>当年吵着要玩的游戏,今天晚上了,却没有小时候那个味道</p>
+            <button class="download_button" onclick="download_file('https://github.com/yufeng6661666/yufeng6661666.github.io/releases/download/%E4%BE%9D%E6%97%A7%E4%B8%8D%E7%9F%A5%E9%81%93/3.Ultraman_Fighting_Evolution_3_JAP_PS2DVD-GANT.XiDong.Net.iso.7z','奥特曼格斗进化3.7z')">下载</button>
+            <button class="fast_download_button" onclick="download_file('https://ghproxy.cn/github.com/yufeng6661666/yufeng6661666.github.io/releases/download/%E4%BE%9D%E6%97%A7%E4%B8%8D%E7%9F%A5%E9%81%93/3.Ultraman_Fighting_Evolution_3_JAP_PS2DVD-GANT.XiDong.Net.iso.7z','奥特曼格斗进化3.7z')">快速下载</button>
+        </div> <br /> <br />
+        <div class="floating-box">
+            <strong style="font-size:20px">字典破解</strong>
+            <p>简单字典破解</p>
+            <button class="download_button" onclick="download_file('https://github.com/yufeng6661666/yufeng6661666.github.io/releases/download/123/default.zip','字典破解.zip')">下载</button>
+            <button class="fast_download_button" onclick="download_file('https://ghproxy.cn/github.com/yufeng6661666/yufeng6661666.github.io/releases/download/123/default.zip','字典破解.zip')">快速下载</button>
         </div>
     </div>
 </body>
